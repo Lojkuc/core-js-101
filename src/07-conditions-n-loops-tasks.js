@@ -175,8 +175,16 @@ function isInsideCircle(circle, point) {
  *   'abracadabra'  => 'c'
  *   'entente' => null
  */
-function findFirstSingleChar(/* str */) {
-  throw new Error('Not implemented');
+function findFirstSingleChar(str) {
+  let i = 0;
+  while (i < str.length) {
+    const pos = str.indexOf(str[i]);
+    if (str.lastIndexOf(str[[i]]) === pos) {
+      return str[i];
+    }
+    i += 1;
+  }
+  return null;
 }
 
 
@@ -280,8 +288,10 @@ function isCreditCardNumber(/* ccn */) {
  *   10000 ( 1+0+0+0+0 = 1 ) => 1
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
-function getDigitalRoot(/* num */) {
-  throw new Error('Not implemented');
+function getDigitalRoot(num) {
+  if (num < 9) return num;
+  const n = num.toString().split('').reduce((sum, el) => +sum + +el);
+  return getDigitalRoot(n);
 }
 
 
@@ -306,8 +316,26 @@ function getDigitalRoot(/* num */) {
  *   '{)' = false
  *   '{[(<{[]}>)]}' = true
  */
-function isBracketsBalanced(/* str */) {
-  throw new Error('Not implemented');
+function isBracketsBalanced(str) {
+  const obj = {
+    ']': '[',
+    ')': '(',
+    '}': '{',
+    '>': '<',
+  };
+  const stack = [];
+  const arr = str.split('');
+  for (let i = 0; i < str.length;) {
+    if (Object.values(obj).includes(arr[i])) {
+      stack.push(arr[i]);
+    } else if (Object.keys(obj).includes(arr[i]) && obj[arr[i]] === stack[stack.length - 1]) {
+      stack.pop();
+    } else {
+      return false;
+    }
+    i += 1;
+  }
+  return stack.length === 0;
 }
 
 

@@ -273,9 +273,9 @@ function getSecondItems(arr) {
  *  [ 'a', 'b', 'c', null ] => [ 'a', 'b','b', 'c','c','c',  null,null,null,null ]
  *  [ 1,2,3,4,5 ] => [ 1, 2,2, 3,3,3, 4,4,4,4, 5,5,5,5,5 ]
  */
-function propagateItemsByPositionIndex(/* arr */) {
-  throw new Error('Not implemented');
-  // return arr.map((el, index) => el.toString().repeat(index + 1)).join('').split('');
+function propagateItemsByPositionIndex(arr) {
+  const res = arr.map((el, index) => new Array(index + 1).fill(el));
+  return res.flat();
 }
 
 
@@ -457,8 +457,9 @@ function sortCitiesArray(/* arr */) {
  *           [0,0,0,1,0],
  *           [0,0,0,0,1]]
  */
-function getIdentityMatrix(/* n */) {
-  throw new Error('Not implemented');
+function getIdentityMatrix(n) {
+  return Array(n).fill(Array(n).fill(0))
+    .map((el, index) => el.map((elem, index2) => (index === index2 ? 1 : 0)));
 }
 
 /**
